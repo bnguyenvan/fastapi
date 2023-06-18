@@ -20,7 +20,8 @@ while True:
             database='fastapi', 
             user='postgres', 
             password='%VC#c4NXK9eFg6', 
-            port='5432')
+            port='5432',
+            cursor_factory=RealDictCursor)
         cursor = conn.cursor()
         print("Database conneciton was successful!")
         break
@@ -37,6 +38,7 @@ def read_root():
 def get_posts():
     cursor.execute("""SELECT * FROM posts""")
     posts = cursor.fetchall()
+    print(posts)
     return {"data": posts}
 
 @app.get("/posts/{id}")
